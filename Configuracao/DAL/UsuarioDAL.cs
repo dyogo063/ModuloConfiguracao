@@ -65,7 +65,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao inserir no banco de dados", ex);
+                throw new Exception($"Ocorreu um erro ao alterar no banco de dados", ex);
             }
             finally
             {
@@ -87,7 +87,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao inserir no banco de dados", ex);
+                throw new Exception($"Ocorreu um erro ao exluir no banco de dados", ex);
             }
             finally
             {

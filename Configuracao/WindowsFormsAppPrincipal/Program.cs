@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAppPrincipal
 {
-    public static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace WindowsFormsAppPrincipal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormsPincipal());
+            Application.Run(new FormPrincipal());
         }
     }
 }
