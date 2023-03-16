@@ -74,9 +74,9 @@ namespace DAL
                 cn.Close();
             }
         }
-        public void BuscarPorCpf(string _cpf)
+        public Usuario BuscarPorCpf(string _cpf)
         {
-            List<Usuario> usuarios = new List<Usuario>();
+            
             Usuario usuario = new Usuario();
 
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
@@ -104,10 +104,10 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        usuarios.Add(usuario);
+                        
                     }
                 }
-
+                return usuario;
             }
 
             catch (Exception ex)
@@ -118,6 +118,7 @@ namespace DAL
             {
                 cn.Close();
             }
+            
 
         }
 
@@ -170,7 +171,7 @@ namespace DAL
         }
         public Usuario BuscarPorNomeusuario(string _nomeUsuario)
         {
-            List<Usuario> usuarios = new List<Usuario>();
+            
             Usuario usuario = new Usuario();
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -197,7 +198,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        usuarios.Add(usuario);
+                        
 
                     }
 
