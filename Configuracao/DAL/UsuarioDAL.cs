@@ -74,6 +74,53 @@ namespace DAL
                 cn.Close();
             }
         }
+        public void BuscarPorCpf(string _cpf)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE CPF = @CPF";
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@CPF+.", _cpf);
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["ID"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+                    }
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar Cpf no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+        }
+
         public List<Usuario> BuscarPorNome(string _nome)
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -88,6 +135,8 @@ namespace DAL
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Nome", "%" +_nome + "%");
+
+                cn.Open();
 
                 using(SqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -121,7 +170,49 @@ namespace DAL
         }
         public Usuario BuscarPorNomeusuario(string _nomeUsuario)
         {
-            throw new NotImplementedException();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT Id, Nome, NomeUsuario, Email, CPF, Ativo, Senha
+                                  FROM Usuario WHERE NomeUsuario LIKE @NomeUsuario";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@NomeUsuario", "%" + _nomeUsuario + "%");
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["Id"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+
+                    }
+
+
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar alterar o usuario no banco de dados. ", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
         public Usuario BuscarPorId(int _id)
         {
