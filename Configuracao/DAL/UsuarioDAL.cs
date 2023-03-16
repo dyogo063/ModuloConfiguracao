@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,51 @@ namespace DAL
                 cn.Close();
             }
         }
+        public List<Usuario> BuscarPorNome(string _nome)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT Id, Nome, NomeUsuario, Email, CPF, Ativo, Senha
+                                  FROM Usuario WHERE Nome LIKE @Nome";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Nome", "%" +_nome + "%");
+
+                using(SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["Id"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+
+                    }
+
+
+                }
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar alterar o usuario no banco de dados. ", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+        }
         public Usuario BuscarPorNomeusuario(string _nomeUsuario)
         {
             throw new NotImplementedException();
@@ -92,7 +138,7 @@ namespace DAL
                 cn.Open();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    if (rd.Read)
+                    if (rd.Read())
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(rd["Id"]);
@@ -106,12 +152,12 @@ namespace DAL
 
                     }
                 }
-                return usuarios;
+                return usuario;
             }
            
             catch(Exception ex)
             {
-                throw new Exception($"ocorreu um erro ao buscar por id");
+                throw new Exception($"ocorreu um erro ao buscar por id",ex);
             }
             finally
             {
@@ -124,7 +170,7 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE INTO Usuario(Nome, NomeUsuario, Email, CPF, Ativo, Senha) Values(@Nome, @Nomeusuario, @Email, @CPF, @Ativo, @Senha)";
+                cmd.CommandText = @"UPDATE Usuario SET Nome = @Nome, NomeUsuario = @NomeUsuario, Email = @Email, CPF = @CPF, Ativo = @Ativo, Senha = @Senha WHERE Id = @Id"; 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Nome", _usuario.Nome);
                 cmd.Parameters.AddWithValue("@NomeUsuario", _usuario.NomeUsuario);
