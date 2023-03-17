@@ -11,9 +11,7 @@ namespace BLL
         public void Inserir(Usuario _usuario)
         {
            
-
-                UsuarioDAL usuarioDAL = new UsuarioDAL();
-                usuarioDAL.Inserir(_usuario);
+    
             
         }
         private void Alterar(Usuario _usuario)

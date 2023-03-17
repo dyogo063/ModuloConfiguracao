@@ -7,54 +7,40 @@ namespace BLL
 {
     public class PermissaoBLL
     {
-        public void Inserir(Usuario _usuario)
+        public void Inserir(Permissao _permissao)
         {
 
 
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
-            usuarioDAL.Inserir(_usuario);
+            PermissaoDAL permissaoDAL = new PermissaoDAL();
+            permissaoDAL.Inserir(_permissao);
 
         }
-        private void Alterar(Usuario _usuario)
+        private void Alterar(Permissao _usuario)
         {
-            ValidarDados(_usuario);
+            ValidarDados2(_usuario);
 
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
-            usuarioDAL.Alterar(_usuario);
+            PermissaoDAL permissaoDAL = new PermissaoDAL();
+            permissaoDAL.Alterar(_usuario);
 
         }
-        private void ValidarDados(Usuario _usuario)
+        private void ValidarDados2(Permissao _permissao)
         {
-            if (_usuario.Senha.Length <= 3)
-                throw new Exception("A senha deve ter mais de 3 caracteres");
-            if (_usuario.Nome.Length <= 2)
-                throw new Exception("O nome deve ter mais de 2 caracteres");
+            if (_permissao.Descricao.Length <= 10)
+                throw new Exception("A descricao deve ter mais de 10 caracteres");
 
         }
         public void Excluir(int _id)
         {
-            new UsuarioDAL().Excluir(_id);
+            new PermissaoDAL().Excluir(_id);
 
         }
-        public List<Usuario> BuscarTodos()
+        public Permissao BuscarPorId(int _id)
         {
-            return new UsuarioDAL().BuscarTodos();
+            return new PermissaoDAL().BuscarPorId(_id);
         }
-        public Usuario BuscarPorId(int _id)
+        public List<Permissao> BuscarPorDescricao(string _descricao)
         {
-            return new UsuarioDAL().BuscarPorId(_id);
-        }
-        public Usuario BuscarPorCpf(string _cpf)
-        {
-            return new UsuarioDAL().BuscarPorCpf(_cpf);
-        }
-        public List<Usuario> BuscarPorNome(string _nome)
-        {
-            return new UsuarioDAL().BuscarPorNome(_nome);
-        }
-        public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
-        {
-            return new UsuarioDAL().BuscarPorNomeusuario(_nomeUsuario);
+            return new PermissaoDAL().BuscarPorDescricao(_descricao);
         }
 
     }

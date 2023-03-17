@@ -59,7 +59,7 @@ namespace DAL
             finally
             {
                 cn.Close();
-            };
+            }
         }
         public List<Permissao> BuscarPorDescricao(string _descricao)
         {
@@ -71,11 +71,11 @@ namespace DAL
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandText = @"SELECT Id, Nome, NomeUsuario, Email, CPF, Ativo, Senha
-                                  FROM Usuario WHERE Nome LIKE @Nome";
+                                  FROM  WHERE Nome LIKE @Nome";
 
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Nome", "%" + _descricao + "%");
-
+                cmd.Parameters.AddWithValue("@Descricao", "%" + _descricao + "%");
+                cmd.Parameters.AddWithValue("@Dsecricao" , _descricao );
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
@@ -84,7 +84,8 @@ namespace DAL
                     {
                         permissao = new Permissao();
                         permissao.Id = Convert.ToInt32(rd["Id"]);
-                        
+                        permissao.Descricao = rd["Descricao"].ToString();
+
 
                     }
 
@@ -101,7 +102,7 @@ namespace DAL
                 cn.Close();
             }
         }
-        public List<Permissao> BuscarPorId(int _id)
+        public Permissao BuscarPorId(int _id)
         {
             List<Permissao> Permissoes = new List<Permissao>();
             Permissao Permissao = new Permissao();
@@ -125,7 +126,7 @@ namespace DAL
 
                     }
                 }
-                return Permissoes;
+                return Permissao;
             }
 
             catch (Exception ex)
