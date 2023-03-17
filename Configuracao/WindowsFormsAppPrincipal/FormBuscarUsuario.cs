@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,24 @@ namespace WindowsFormsAppPrincipal
         public FormBuscarUsuario()
         {
             InitializeComponent();
+        }
+
+     
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            usuarioBindingSource.DataSource = new UsuarioBLL().BuscarTodos();
+
+        }
+
+        private void buttonExcluirusuario_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("deseja realmente excluir?", "Atençao", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
+            int id = ((Usuario)usuarioBindingSource.Current).Id;
+            new UsuarioBLL().Excluir(id);
+            usuarioBindingSource.RemoveCurrent();
         }
     }
 }

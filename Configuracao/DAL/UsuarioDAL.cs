@@ -25,11 +25,14 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@CPF", _usuario.CPF);
                 cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
                 cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
 
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao inserir no banco de dados", ex);
+                throw new Exception("Ocorreu um erro ao inserir no banco de dados", ex);
             }
             finally
             {
@@ -45,7 +48,7 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, Nome,NomeUsuario,Email, CPF, Ativo, Senha WHERE (@Id, @Nome , @NomeUsuario, @Email, @CPF, @Ativo, FROM @Senha)";
+                cmd.CommandText = "SELECT Id, Nome,NomeUsuario,Email, CPF, Ativo, Senha FROM Usuario";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cn.Open();
                 using (SqlDataReader rd = cmd.ExecuteReader())
@@ -291,6 +294,8 @@ namespace DAL
                 cmd.CommandText = "DELETE FROM Usuario WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _id);
+                cn.Open();
+                cmd.ExecuteNonQuery();
 
 
             }

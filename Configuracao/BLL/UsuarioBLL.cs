@@ -10,7 +10,10 @@ namespace BLL
 
         public void Inserir(Usuario _usuario)
         {
-           
+           ValidarDados(_usuario);
+
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            usuarioDAL.Inserir(_usuario);  
     
             
         }
@@ -32,6 +35,7 @@ namespace BLL
             }
         public void Excluir(int _id)
         {
+
             new UsuarioDAL().Excluir(_id);
 
         }
