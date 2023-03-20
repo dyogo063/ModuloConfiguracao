@@ -17,7 +17,7 @@ namespace BLL
     
             
         }
-        private void Alterar(Usuario _usuario)
+        public void Alterar(Usuario _usuario)
         {
             ValidarDados(_usuario);
 

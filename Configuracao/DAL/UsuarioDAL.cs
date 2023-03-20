@@ -227,10 +227,12 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, Nome , NomeUsuario, Email, CPF, Ativo, Senha WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id, Nome , NomeUsuario, Email, CPF, Ativo, Senha FROM Usuario WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id", _id); 
 
                 cn.Open();
+                cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
@@ -273,7 +275,10 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@CPF", _usuario.CPF);
                 cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
                 cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
-
+                cmd.Parameters.AddWithValue("@Id",_usuario.Id);
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
