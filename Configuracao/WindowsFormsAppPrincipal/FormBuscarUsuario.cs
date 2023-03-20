@@ -19,7 +19,7 @@ namespace WindowsFormsAppPrincipal
             InitializeComponent();
         }
 
-     
+
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
@@ -28,7 +28,13 @@ namespace WindowsFormsAppPrincipal
         }
 
         private void buttonExcluirusuario_Click(object sender, EventArgs e)
+            
         {
+            if(usuarioBindingSource.Count <= 0)
+            {
+                MessageBox.Show("Nao existe registro para ser escluido");
+                return;
+            }
             if (MessageBox.Show("deseja realmente excluir?", "Atençao", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 

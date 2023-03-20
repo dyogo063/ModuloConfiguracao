@@ -105,9 +105,9 @@ namespace DAL
                 cn.Close();
             }
         }
-        public List<GrupoUsuario> BuscarPorId(int _id)
+        public GrupoUsuario BuscarPorId(int _id)
         {
-            List<GrupoUsuario> Grupousuarios = new List<GrupoUsuario>();
+            
             GrupoUsuario Grupousuario = new GrupoUsuario();
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -129,7 +129,7 @@ namespace DAL
 
                     }
                 }
-                return Grupousuarios;
+                return Grupousuario;
             }
 
             catch (Exception ex)
