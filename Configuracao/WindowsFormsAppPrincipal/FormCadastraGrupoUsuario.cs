@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,19 @@ namespace WindowsFormsAppPrincipal
         public FormCadastraGrupoUsuario()
         {
             InitializeComponent();
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            
+           GrupoUsuarioBLL grupoUsuarioBLL = new GrupoUsuarioBLL();
+           
+           
         }
     }
 }
