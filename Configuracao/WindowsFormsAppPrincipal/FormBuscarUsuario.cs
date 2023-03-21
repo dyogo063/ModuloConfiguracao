@@ -23,7 +23,15 @@ namespace WindowsFormsAppPrincipal
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
+            try
+            {
             usuarioBindingSource.DataSource = new UsuarioBLL().BuscarTodos();
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 

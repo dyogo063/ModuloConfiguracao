@@ -60,21 +60,21 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // grupoDeUsuariosToolStripMenuItem
             // 
             this.grupoDeUsuariosToolStripMenuItem.Name = "grupoDeUsuariosToolStripMenuItem";
-            this.grupoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.grupoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.grupoDeUsuariosToolStripMenuItem.Text = "Grupo de usuarios";
             this.grupoDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeUsuariosToolStripMenuItem_Click);
             // 
             // permissoesToolStripMenuItem
             // 
             this.permissoesToolStripMenuItem.Name = "permissoesToolStripMenuItem";
-            this.permissoesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.permissoesToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.permissoesToolStripMenuItem.Text = "Permissoes";
             // 
             // FormPrincipal
@@ -86,6 +86,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPrincipal";
             this.Text = "FormPrincipal";
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
