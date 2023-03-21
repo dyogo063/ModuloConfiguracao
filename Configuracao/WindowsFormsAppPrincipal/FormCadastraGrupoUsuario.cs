@@ -28,6 +28,7 @@ namespace WindowsFormsAppPrincipal
         {
             
            GrupoUsuarioBLL grupoUsuarioBLL = new GrupoUsuarioBLL();
+     
            
            
         }

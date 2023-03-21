@@ -321,7 +321,7 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"select 1 from PermissaoGrupoUsuario
+                cmd.CommandText = @"SELECT 1 FROM PermissaoGrupoUsuario
                    INNER JOIN UsuarioGrupoUsuario on PermissaoGrupoUsuario.IdGrupoUsuario = UsuarioGrupoUsuario.IdGrupoUsuario
                     WHERE UsuarioGrupoUsuario.IdUsuario = @IdUsuario and PermissaoGrupoUsuario.IdPermissao = @IdPermissao";
                 cmd.CommandType=System.Data.CommandType.Text;
