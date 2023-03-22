@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@CPF", _usuario.CPF);
                 cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
                 cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
+
                 cmd.Connection = cn;
                 cn.Open();
                 cmd.ExecuteNonQuery();
@@ -63,6 +65,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
                     }
                 }
@@ -154,6 +157,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
 
                     }
@@ -201,7 +205,8 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
+
 
                     }
 
@@ -232,7 +237,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Id", _id); 
 
                 cn.Open();
-                cmd.ExecuteNonQuery();
+               
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
@@ -245,7 +250,8 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        usuarios.Add(usuario);
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
+                        
 
                     }
                 }
@@ -328,6 +334,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@IdUsuario",_idUsuario);
                 cmd.Parameters.AddWithValue("@IdPermissao",_idPermissao);
                 cn.Open();
+                cmd.ExecuteNonQuery();
                 using(SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if(rd.Read())  
@@ -338,12 +345,55 @@ namespace DAL
             }
             catch(Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar validar permissao");
+                throw new Exception("Ocorreu um erro ao tentar validar permissao,",ex);
             }
 
         }
 
-     }
+        public void AdicionarGrupoUsuario(int idUsuario, int idGrupoUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UsuarioPertenceAoGrupo(int _idUsuario, int _idGrupoUsuario)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT 1 FROM Usuario WHERE IdUsuario = @IdUsuario AND IdGrupoUsuario = @IdGrupoUsuario";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", _idGrupoUsuario);
+                cmd.Parameters.AddWithValue("@IdUsuario", _idUsuario);
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                       return true;
+
+
+                    }
+                    return false;
+                }
+                
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception($"ocorreu um erro ao tentar validar existencia de grupo", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+    }
 } 
 
  

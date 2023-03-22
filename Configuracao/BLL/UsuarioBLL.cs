@@ -8,6 +8,7 @@ namespace BLL
 {
     public class UsuarioBLL
     {
+        public object AdicionarGrupoUsuario { get; set; }
 
         public void Inserir(Usuario _usuario)
         {
@@ -73,6 +74,12 @@ namespace BLL
         {
           if( !new UsuarioDAL().ValidarPermissao(Constantes.IdUsuarioLogado,_IdPermissao))
             throw new Exception("Você nao possui permissao para realizar esta ação. Procure o administrador do sistema");
+        }
+
+        public void AdicionarGrupoUsuario(int _idUsuario, int _idGrupoUsuario)
+        {
+            if(!new UsuarioDAL().UsuarioPertenceAoGrupo(_idUsuario, _idGrupoUsuario))
+            new UsuarioDAL().AdicionarGrupoUsuario(_idUsuario, _idGrupoUsuario);
         }
     }
 }

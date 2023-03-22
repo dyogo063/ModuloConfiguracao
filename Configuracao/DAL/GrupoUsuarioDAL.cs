@@ -20,6 +20,8 @@ namespace DAL
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _Grupousuario.Id);
                 cmd.Parameters.AddWithValue("@NomeGrupo", _Grupousuario.NomeGrupo);
+                cn.Open();
+                cmd.ExecuteNonQuery();
               
 
             }
@@ -82,6 +84,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@NomeGrupo", "%" + _nomeGrupo + "%");
 
                 cn.Open();
+                
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -186,5 +189,44 @@ namespace DAL
             }
 
         }
+        public List<GrupoUsuario> BuscarPorIdUsuario(int _idUsuario)
+        {
+            List<GrupoUsuario> Grupousuarios = new List<GrupoUsuario>();
+            GrupoUsuario Grupousuario = new GrupoUsuario();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT GrupoUsuario.Id, GrupoUsuario.NomeGrupo FROM GrupoUsuario INNER JOIN UsuarioGrupoUsuario ON GrupoUsuario.Id = UsuarioGrupoUsuario.IdGrupoUsuario WHERE UsuarioGrupoUsuario.IdUsuario = @IdUsuario";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario", _idUsuario);
+
+                cn.Open();
+                
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        Grupousuario = new GrupoUsuario();
+                        Grupousuario.Id = Convert.ToInt32(rd["Id"]);
+                        Grupousuario.NomeGrupo = rd["NomeGrupo"].ToString();
+                        Grupousuarios.Add(Grupousuario);
+
+                    }
+                }
+                return Grupousuarios;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception($"ocorreu um erro ao buscar por id de usuário", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+
     }
 }

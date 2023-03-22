@@ -15,7 +15,7 @@ namespace BLL
             permissaoDAL.Inserir(_permissao);
 
         }
-        private void Alterar(Permissao _usuario)
+        public void Alterar(Permissao _usuario)
         {
             ValidarDados2(_usuario);
 

@@ -45,7 +45,7 @@ namespace WindowsFormsAppPrincipal
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            Constantes.IdUsuarioLogado = 13;
+            Constantes.IdUsuarioLogado = 3;
         }
     }
 }

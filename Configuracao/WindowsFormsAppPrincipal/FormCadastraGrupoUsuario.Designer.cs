@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxNomeGrupoUsuarios = new System.Windows.Forms.TextBox();
             this.buttonSalvar = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
+            this.grupoUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,6 +60,7 @@
             // 
             // textBoxNomeGrupoUsuarios
             // 
+            this.textBoxNomeGrupoUsuarios.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.grupoUsuarioBindingSource, "NomeGrupo", true));
             this.textBoxNomeGrupoUsuarios.Location = new System.Drawing.Point(245, 187);
             this.textBoxNomeGrupoUsuarios.Name = "textBoxNomeGrupoUsuarios";
             this.textBoxNomeGrupoUsuarios.Size = new System.Drawing.Size(328, 22);
@@ -82,6 +86,10 @@
             this.buttonCancelar.UseVisualStyleBackColor = true;
             this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
+            // grupoUsuarioBindingSource
+            // 
+            this.grupoUsuarioBindingSource.DataSource = typeof(Models.GrupoUsuario);
+            // 
             // FormCadastraGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -101,6 +109,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de grupo usuário";
+            this.Load += new System.EventHandler(this.FormCadastraGrupoUsuario_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,5 +123,6 @@
         private System.Windows.Forms.TextBox textBoxNomeGrupoUsuarios;
         private System.Windows.Forms.Button buttonSalvar;
         private System.Windows.Forms.Button buttonCancelar;
+        private System.Windows.Forms.BindingSource grupoUsuarioBindingSource;
     }
 }

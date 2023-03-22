@@ -32,5 +32,10 @@ namespace WindowsFormsAppPrincipal
            
            
         }
+
+        private void FormCadastraGrupoUsuario_Load(object sender, EventArgs e)
+        {
+          
+        }
     }
 }
