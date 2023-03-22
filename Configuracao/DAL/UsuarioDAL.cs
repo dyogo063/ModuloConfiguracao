@@ -350,9 +350,30 @@ namespace DAL
 
         }
 
-        public void AdicionarGrupoUsuario(int idUsuario, int idGrupoUsuario)
+        public void AdicionarGrupoUsuario(int _idUsuario, int _idGrupoUsuario)
         {
-            throw new NotImplementedException();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(IdUsuario, IdGrupoUsuario) Values(@IdUsuario, @IdGrupoUsuario)";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario", _idUsuario);
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", _idGrupoUsuario);
+
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar vincular um usuario no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
 
         public bool UsuarioPertenceAoGrupo(int _idUsuario, int _idGrupoUsuario)
