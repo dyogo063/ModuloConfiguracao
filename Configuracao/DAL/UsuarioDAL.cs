@@ -12,6 +12,8 @@ namespace DAL
 {
     public class UsuarioDAL
     {
+    
+    
         public void Inserir(Usuario _usuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);

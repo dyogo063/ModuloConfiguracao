@@ -36,9 +36,8 @@ namespace BLL
         }
         private void ValidarDados(GrupoUsuario _grupousuario)
         {
-            if (_grupousuario.NomeGrupo.Length <= 5)
-                throw new System.Exception("O nome do grupo deve ter mais de 5 caracteres");
-
+            if (_grupousuario.NomeGrupo.Length <= 3)
+                throw new System.Exception("O nome do grupo deve ter mais de 3 caracteres");
         }
     }
 

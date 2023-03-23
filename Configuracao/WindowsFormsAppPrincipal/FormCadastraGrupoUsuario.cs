@@ -14,6 +14,7 @@ namespace WindowsFormsAppPrincipal
 {
     public partial class FormCadastraGrupoUsuario : Form
     {
+        public int Id;
         public FormCadastraGrupoUsuario()
         {
             InitializeComponent();
@@ -28,6 +29,16 @@ namespace WindowsFormsAppPrincipal
         {
             
            GrupoUsuarioBLL grupoUsuarioBLL = new GrupoUsuarioBLL();
+            grupoUsuarioBindingSource.EndEdit();
+            if (Id == 0)
+                grupoUsuarioBLL.Inserir((GrupoUsuario)grupoUsuarioBindingSource.Current);
+            else
+                grupoUsuarioBLL.Inserir((GrupoUsuario)grupoUsuarioBindingSource.Current);
+            MessageBox.Show("Registro salvo com sucesso");
+            Close();
+
+            
+            
      
            
            
@@ -35,7 +46,21 @@ namespace WindowsFormsAppPrincipal
 
         private void FormCadastraGrupoUsuario_Load(object sender, EventArgs e)
         {
-          
+            if(Id == 0)
+            {
+                grupoUsuarioBindingSource.AddNew();
+            }
+            Constantes.IdUsuarioLogado = 3;
+        }
+
+        private void nomeGrupoLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nomeGrupoTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

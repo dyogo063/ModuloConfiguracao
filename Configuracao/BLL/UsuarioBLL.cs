@@ -8,29 +8,30 @@ namespace BLL
 {
     public class UsuarioBLL
     {
-        public object AdicionarGrupoUsuario { get; set; }
 
-        public void Inserir(Usuario _usuario)
+        public void Inserir(Usuario _usuario, string _confirmacaoDeSenha)
         {
-            ValidarPermissao(2);
-           ValidarDados(_usuario);
+           ValidarPermissao(2);
+           ValidarDados(_usuario,  _confirmacaoDeSenha);
 
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             usuarioDAL.Inserir(_usuario);  
-    
-            
         }
-        public void Alterar(Usuario _usuario)
+        public void Alterar(Usuario _usuario, string _confirmacaoDeSenha)
         {
             ValidarPermissao(3);
-            ValidarDados(_usuario);
+            ValidarDados(_usuario, _confirmacaoDeSenha);
 
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             usuarioDAL.Alterar(_usuario);
             
         }
-        private void ValidarDados(Usuario _usuario)
+        private void ValidarDados(Usuario _usuario, string _confirmacaoDeSenha)
         {
+            if (_usuario.Senha != _confirmacaoDeSenha)
+            {
+                throw new Exception("A senha de confirmacao deve ser igual a senha");
+            }
             if (_usuario.Senha.Length <= 3)
              throw new Exception("A senha deve ter mais de 3 caracteres");
             if (_usuario.Nome.Length <= 2)

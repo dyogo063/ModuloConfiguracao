@@ -16,10 +16,11 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"INSERT INTO GrupoUsuario(Id, NomeGrupo) Values(@Id, @NomeGrupo)";
+                cmd.CommandText = @"INSERT INTO GrupoUsuario( NomeGrupo) Values(@NomeGrupo)";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", _Grupousuario.Id);
+      
                 cmd.Parameters.AddWithValue("@NomeGrupo", _Grupousuario.NomeGrupo);
+                cmd.Connection = cn;
                 cn.Open();
                 cmd.ExecuteNonQuery();
               
@@ -150,12 +151,12 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE INTO GrupoUsuario(Id, NomeGrupo) Values(@Id, @NomeGrupo)";
+                cmd.CommandText = @"UPDATE GrupoUsuario SET NomeGrupo = @NomeGrupo WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", _grupoUsuario.Id);
                 cmd.Parameters.AddWithValue("@NomeGrupo", _grupoUsuario.NomeGrupo);
-          
-
+                cmd.Connection = cn;   
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -173,9 +174,12 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = "DELETE FROM GrupoUsuario WHERE Id = @Id";
+                cmd.CommandText = @"DELETE FROM GrupoUsuario WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _id);
+                cmd.Connection=cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
 
 
             }

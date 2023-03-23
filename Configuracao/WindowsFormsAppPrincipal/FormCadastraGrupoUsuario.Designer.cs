@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label nomeGrupoLabel;
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxNomeGrupoUsuarios = new System.Windows.Forms.TextBox();
+            this.grupoUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonSalvar = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
-            this.grupoUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nomeGrupoTextBox = new System.Windows.Forms.TextBox();
+            nomeGrupoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,22 +50,9 @@
             this.label1.Text = "Cadastro de grupo de usuários";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // grupoUsuarioBindingSource
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 168);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Nome do grupo";
-            // 
-            // textBoxNomeGrupoUsuarios
-            // 
-            this.textBoxNomeGrupoUsuarios.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.grupoUsuarioBindingSource, "NomeGrupo", true));
-            this.textBoxNomeGrupoUsuarios.Location = new System.Drawing.Point(245, 187);
-            this.textBoxNomeGrupoUsuarios.Name = "textBoxNomeGrupoUsuarios";
-            this.textBoxNomeGrupoUsuarios.Size = new System.Drawing.Size(328, 22);
-            this.textBoxNomeGrupoUsuarios.TabIndex = 2;
+            this.grupoUsuarioBindingSource.DataSource = typeof(Models.GrupoUsuario);
             // 
             // buttonSalvar
             // 
@@ -86,19 +74,34 @@
             this.buttonCancelar.UseVisualStyleBackColor = true;
             this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
-            // grupoUsuarioBindingSource
+            // nomeGrupoLabel
             // 
-            this.grupoUsuarioBindingSource.DataSource = typeof(Models.GrupoUsuario);
+            nomeGrupoLabel.AutoSize = true;
+            nomeGrupoLabel.Location = new System.Drawing.Point(243, 183);
+            nomeGrupoLabel.Name = "nomeGrupoLabel";
+            nomeGrupoLabel.Size = new System.Drawing.Size(87, 16);
+            nomeGrupoLabel.TabIndex = 4;
+            nomeGrupoLabel.Text = "Nome Grupo:";
+            nomeGrupoLabel.Click += new System.EventHandler(this.nomeGrupoLabel_Click);
+            // 
+            // nomeGrupoTextBox
+            // 
+            this.nomeGrupoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.grupoUsuarioBindingSource, "NomeGrupo", true));
+            this.nomeGrupoTextBox.Location = new System.Drawing.Point(246, 202);
+            this.nomeGrupoTextBox.Name = "nomeGrupoTextBox";
+            this.nomeGrupoTextBox.Size = new System.Drawing.Size(207, 22);
+            this.nomeGrupoTextBox.TabIndex = 5;
+            this.nomeGrupoTextBox.TextChanged += new System.EventHandler(this.nomeGrupoTextBox_TextChanged);
             // 
             // FormCadastraGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(nomeGrupoLabel);
+            this.Controls.Add(this.nomeGrupoTextBox);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonSalvar);
-            this.Controls.Add(this.textBoxNomeGrupoUsuarios);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
@@ -119,10 +122,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxNomeGrupoUsuarios;
         private System.Windows.Forms.Button buttonSalvar;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.BindingSource grupoUsuarioBindingSource;
+        private System.Windows.Forms.TextBox nomeGrupoTextBox;
     }
 }

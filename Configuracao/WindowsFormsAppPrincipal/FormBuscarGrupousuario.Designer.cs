@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.grupoUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grupoUsuarioDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.permissoesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.permissoesDataGridView = new System.Windows.Forms.DataGridView();
@@ -38,12 +40,10 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.buttonAlterar = new System.Windows.Forms.Button();
-            this.buttonExcluir = new System.Windows.Forms.Button();
+            this.buttonAdicionar = new System.Windows.Forms.Button();
             this.buttonExcluirGrupo = new System.Windows.Forms.Button();
             this.buttonAdicionarPermissao = new System.Windows.Forms.Button();
             this.buttonExcluirPermissao = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.permissoesBindingSource)).BeginInit();
@@ -72,6 +72,24 @@
             this.grupoUsuarioDataGridView.RowTemplate.Height = 24;
             this.grupoUsuarioDataGridView.Size = new System.Drawing.Size(508, 303);
             this.grupoUsuarioDataGridView.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "NomeGrupo";
+            this.dataGridViewTextBoxColumn2.HeaderText = "NomeGrupo";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // textBox1
             // 
@@ -134,15 +152,17 @@
             this.buttonAlterar.TabIndex = 4;
             this.buttonAlterar.Text = "Alterar";
             this.buttonAlterar.UseVisualStyleBackColor = true;
+            this.buttonAlterar.Click += new System.EventHandler(this.buttonAlterar_Click);
             // 
-            // buttonExcluir
+            // buttonAdicionar
             // 
-            this.buttonExcluir.Location = new System.Drawing.Point(364, 93);
-            this.buttonExcluir.Name = "buttonExcluir";
-            this.buttonExcluir.Size = new System.Drawing.Size(75, 23);
-            this.buttonExcluir.TabIndex = 4;
-            this.buttonExcluir.Text = "Adicionar";
-            this.buttonExcluir.UseVisualStyleBackColor = true;
+            this.buttonAdicionar.Location = new System.Drawing.Point(364, 93);
+            this.buttonAdicionar.Name = "buttonAdicionar";
+            this.buttonAdicionar.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdicionar.TabIndex = 4;
+            this.buttonAdicionar.Text = "Adicionar";
+            this.buttonAdicionar.UseVisualStyleBackColor = true;
+            this.buttonAdicionar.Click += new System.EventHandler(this.buttonAdicionar_Click);
             // 
             // buttonExcluirGrupo
             // 
@@ -152,6 +172,7 @@
             this.buttonExcluirGrupo.TabIndex = 4;
             this.buttonExcluirGrupo.Text = "Excluir";
             this.buttonExcluirGrupo.UseVisualStyleBackColor = true;
+            this.buttonExcluirGrupo.Click += new System.EventHandler(this.buttonExcluirGrupo_Click);
             // 
             // buttonAdicionarPermissao
             // 
@@ -171,24 +192,6 @@
             this.buttonExcluirPermissao.Text = "Excluir";
             this.buttonExcluirPermissao.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "NomeGrupo";
-            this.dataGridViewTextBoxColumn2.HeaderText = "NomeGrupo";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
             // FormBuscarGrupousuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -197,7 +200,7 @@
             this.Controls.Add(this.buttonExcluirPermissao);
             this.Controls.Add(this.buttonAdicionarPermissao);
             this.Controls.Add(this.buttonExcluirGrupo);
-            this.Controls.Add(this.buttonExcluir);
+            this.Controls.Add(this.buttonAdicionar);
             this.Controls.Add(this.buttonAlterar);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.permissoesDataGridView);
@@ -234,7 +237,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.Button buttonBuscar;
         private System.Windows.Forms.Button buttonAlterar;
-        private System.Windows.Forms.Button buttonExcluir;
+        private System.Windows.Forms.Button buttonAdicionar;
         private System.Windows.Forms.Button buttonExcluirGrupo;
         private System.Windows.Forms.Button buttonAdicionarPermissao;
         private System.Windows.Forms.Button buttonExcluirPermissao;
