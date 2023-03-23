@@ -35,5 +35,10 @@ namespace WindowsFormsAppPrincipal
                 frm.ShowDialog();
             }
         }
+
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+            Constantes.IdUsuarioLogado = 3;
+        }
     }
 }
