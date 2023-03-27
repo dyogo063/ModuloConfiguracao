@@ -182,6 +182,7 @@
             this.buttonAdicionarPermissao.TabIndex = 4;
             this.buttonAdicionarPermissao.Text = "Adicionar";
             this.buttonAdicionarPermissao.UseVisualStyleBackColor = true;
+            this.buttonAdicionarPermissao.Click += new System.EventHandler(this.buttonAdicionarPermissao_Click);
             // 
             // buttonExcluirPermissao
             // 

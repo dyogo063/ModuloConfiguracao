@@ -54,5 +54,14 @@ namespace WindowsFormsAppPrincipal
                 frm.ShowDialog();
             }
         }
+
+        private void buttonAdicionarPermissao_Click(object sender, EventArgs e)
+        {
+            using (FormCadastraGrupoUsuario frm = new FormCadastraGrupoUsuario())
+            {
+                frm.ShowDialog();
+            }
+            buttonBuscar_Click(null, null);
+        }
     }
 }
