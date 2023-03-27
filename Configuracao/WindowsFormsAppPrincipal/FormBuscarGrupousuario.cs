@@ -35,7 +35,7 @@ namespace WindowsFormsAppPrincipal
         {
             if(grupoUsuarioBindingSource.Count <= 0)
             {
-                MessageBox.Show("Nao existe registro para ser excluida ");
+                MessageBox.Show("Nao existe registro para ser excluido ");
                 return;
             }
             if(MessageBox.Show("Deseja mesmo excluir esse registro?","atençao",MessageBoxButtons.YesNo) == DialogResult.No)
@@ -62,6 +62,21 @@ namespace WindowsFormsAppPrincipal
                 frm.ShowDialog();
             }
             buttonBuscar_Click(null, null);
+        }
+
+        private void buttonExcluirPermissao_Click(object sender, EventArgs e)
+        {
+            if (permissoesBindingSource.Count <= 0)
+            {
+                MessageBox.Show("Nao existe registro para ser excluido ");
+                return;
+            }
+            if (MessageBox.Show("Deseja mesmo excluir esse registro?", "atençao", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+            int id = ((Permissao)permissoesBindingSource.Current).Id;
+            new PermissaoBLL().Excluir(id);
+            permissoesBindingSource.RemoveCurrent();
+            MessageBox.Show("registro excluido com sucesso");
         }
     }
 }

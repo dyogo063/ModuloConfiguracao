@@ -78,8 +78,7 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT Id, NomeGrupo
-                                  FROM GrupoUsuario WHERE NomeGrupo LIKE @NomeGrupo";
+                cmd.CommandText = @"SELECT Id, NomeGrupo FROM GrupoUsuario WHERE NomeGrupo LIKE @NomeGrupo";
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@NomeGrupo", "%" + _nomeGrupo + "%");
@@ -94,6 +93,7 @@ namespace DAL
                         Grupousuario = new GrupoUsuario();
                         Grupousuario.Id = Convert.ToInt32(rd["Id"]);
                         Grupousuario.NomeGrupo = rd["NomeGrupo"].ToString();
+                        Grupousuarios.Add(Grupousuario);
                     }
 
 

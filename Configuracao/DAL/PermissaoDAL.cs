@@ -70,12 +70,9 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT Id, Nome, NomeUsuario, Email, CPF, Ativo, Senha
-                                  FROM  WHERE Nome LIKE @Nome";
-
+                cmd.CommandText = @"SELECT Id, Descricao FROM Permissao WHERE Descricao LIKE @Descricao";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Descricao", "%" + _descricao + "%");
-                cmd.Parameters.AddWithValue("@Dsecricao" , _descricao );
+                cmd.Parameters.AddWithValue("@Dsecricao" ,"%" + _descricao + "%");
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
