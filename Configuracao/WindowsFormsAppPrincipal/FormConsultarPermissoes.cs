@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace WindowsFormsAppPrincipal
 {
     public partial class FormConsultarPermissoes : Form
     {
+        internal int Id;
         public FormConsultarPermissoes()
         {
             InitializeComponent();
@@ -29,6 +31,38 @@ namespace WindowsFormsAppPrincipal
 
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void buttonSelecionar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (permissaoBindingSource.Count > 0)
+                {
+
+                    Id = ((GrupoUsuario)permissaoBindingSource.Current).Id;
+                    Close();
+                }
+
+                else
+                    MessageBox.Show("Nao existe registro para ser selecionado");
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void FormConsultarPermissoes_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

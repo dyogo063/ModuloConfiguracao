@@ -3,6 +3,7 @@ using Models;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace BLL
 {
@@ -81,6 +82,17 @@ namespace BLL
         {
             if(!new UsuarioDAL().UsuarioPertenceAoGrupo(_idUsuario, _idGrupoUsuario))
             new UsuarioDAL().AdicionarGrupoUsuario(_idUsuario, _idGrupoUsuario);
+        }
+
+        public void Autenticar(string _nomeUsuario, string _senha)
+        {
+            Usuario usuario = new UsuarioDAL().BuscarPorNomeusuario(_nomeUsuario);
+            if (_senha == usuario.Senha && usuario.Ativo)
+            
+                Constantes.IdUsuarioLogado = usuario.Id;
+                else
+                    throw new Exception("usuario ou senha inválido");
+            
         }
     }
 }

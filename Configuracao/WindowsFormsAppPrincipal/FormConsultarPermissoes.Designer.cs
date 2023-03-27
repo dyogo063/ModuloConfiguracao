@@ -62,6 +62,7 @@
             this.buttonCancelar.TabIndex = 6;
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // buttonBuscar
             // 
@@ -81,6 +82,7 @@
             this.buttonSelecionar.TabIndex = 8;
             this.buttonSelecionar.Text = "Selecionar";
             this.buttonSelecionar.UseVisualStyleBackColor = true;
+            this.buttonSelecionar.Click += new System.EventHandler(this.buttonSelecionar_Click);
             // 
             // permissaoBindingSource
             // 
@@ -149,6 +151,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consultar Permissoes";
+            this.Load += new System.EventHandler(this.FormConsultarPermissoes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.permissaoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.permissaoDataGridView)).EndInit();
             this.ResumeLayout(false);
