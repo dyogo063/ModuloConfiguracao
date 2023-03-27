@@ -60,21 +60,24 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.usuariosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // grupoDeUsuariosToolStripMenuItem
             // 
             this.grupoDeUsuariosToolStripMenuItem.Name = "grupoDeUsuariosToolStripMenuItem";
-            this.grupoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.grupoDeUsuariosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.grupoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.grupoDeUsuariosToolStripMenuItem.Text = "Grupo de usuarios";
             this.grupoDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeUsuariosToolStripMenuItem_Click);
             // 
             // permissoesToolStripMenuItem
             // 
             this.permissoesToolStripMenuItem.Name = "permissoesToolStripMenuItem";
-            this.permissoesToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.permissoesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.permissoesToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.permissoesToolStripMenuItem.Text = "Permissoes";
             // 
             // FormPrincipal
