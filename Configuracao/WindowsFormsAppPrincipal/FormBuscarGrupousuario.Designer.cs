@@ -140,7 +140,7 @@
             this.buttonBuscar.Name = "buttonBuscar";
             this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
             this.buttonBuscar.TabIndex = 4;
-            this.buttonBuscar.Text = "Buscar";
+            this.buttonBuscar.Text = "&Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
             this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
@@ -150,7 +150,7 @@
             this.buttonAlterar.Name = "buttonAlterar";
             this.buttonAlterar.Size = new System.Drawing.Size(75, 23);
             this.buttonAlterar.TabIndex = 4;
-            this.buttonAlterar.Text = "Alterar";
+            this.buttonAlterar.Text = "&Alterar";
             this.buttonAlterar.UseVisualStyleBackColor = true;
             this.buttonAlterar.Click += new System.EventHandler(this.buttonAlterar_Click);
             // 
@@ -170,7 +170,7 @@
             this.buttonExcluirGrupo.Name = "buttonExcluirGrupo";
             this.buttonExcluirGrupo.Size = new System.Drawing.Size(75, 23);
             this.buttonExcluirGrupo.TabIndex = 4;
-            this.buttonExcluirGrupo.Text = "Excluir";
+            this.buttonExcluirGrupo.Text = "&Excluir";
             this.buttonExcluirGrupo.UseVisualStyleBackColor = true;
             this.buttonExcluirGrupo.Click += new System.EventHandler(this.buttonExcluirGrupo_Click);
             // 
