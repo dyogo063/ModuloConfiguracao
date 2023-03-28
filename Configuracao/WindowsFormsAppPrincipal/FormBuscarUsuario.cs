@@ -62,13 +62,12 @@ namespace WindowsFormsAppPrincipal
 
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
-            int id = ((Usuario)usuarioBindingSource.Current).Id;
-
-            using(FormCadastroUsuario frm = new FormCadastroUsuario(id))
+            int _id = ((Usuario)usuarioBindingSource.Current).Id;
+            using (FormCadastroUsuario form = new FormCadastroUsuario(_id))
             {
-                frm.ShowDialog();
+                form.ShowDialog();
             }
-            buttonBuscar_Click(null , null);
+            buttonBuscar_Click(null, null);
         }
 
         private void buttonAdicionarGrupoUsuario_Click(object sender, EventArgs e)
