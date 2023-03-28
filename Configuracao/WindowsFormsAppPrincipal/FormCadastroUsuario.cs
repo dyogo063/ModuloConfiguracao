@@ -28,13 +28,7 @@ namespace WindowsFormsAppPrincipal
                 else
                     usuarioBLL.Alterar((Usuario)usuarioBindingSource.Current, textBoxConfirmarSenha.Text);
                 MessageBox.Show("registro salvo com sucesso");
-                
-            
-            usuarioBLL.Inserir((Usuario)usuarioBindingSource.Current, textBoxConfirmarSenha.Text);
-
-
-            MessageBox.Show("Registro salvo com sucesso!");
-            Close();
+                      Close();
             }
             catch (Exception ex)
             {
