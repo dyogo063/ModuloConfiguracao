@@ -298,23 +298,53 @@ namespace DAL
             }
 
         }
-        public void Excluir(int _id)
+        public void Excluir(int _idUsuario,SqlTransaction transaction =null)
         {
+            SqlTransaction _transaction = null;
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
-                SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = "DELETE FROM Usuario WHERE Id = @Id";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", _id);
-                cn.Open();
-                cmd.ExecuteNonQuery();
+                SqlConnection connection = new SqlConnection(Conexao.StringDeConexao);
+                {
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM UsuarioGrupoUsuario WHERE Id = @ID", cn))
+                    {
+                        try
+                        {
+                            cmd.CommandType = System.Data.CommandType.Text;
+                            cmd.Parameters.AddWithValue("@Id", _idUsuario);
 
+                            if (transaction == null)
+                            {
+                                cn.Open();
+                                transaction = cn.BeginTransaction();
+                            }
 
+                            cmd.Transaction = _transaction;
+                            cmd.Connection = _transaction.Connection;
+
+                            RemoverTodosUsuarios(_idUsuario, _transaction);
+                            cmd.ExecuteNonQuery();
+
+                            if (transaction != null)
+                            {
+                                _transaction.Rollback();
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception($"Ocorreu um erro ao excluir um Usuário no banco de dados", ex);
+                        }
+                        finally
+                        {
+                            cn.Close();
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao exluir no banco de dados", ex);
+                throw new Exception($"Ocorreu um erro ao Excluir um usuário no banco de dados", ex);
             }
             finally
             {
@@ -322,6 +352,39 @@ namespace DAL
             }
 
         }
+
+        private void RemoverTodosUsuarios(int _idUsuario, SqlTransaction _transaction)
+        {
+            SqlTransaction transaction = _transaction;
+            using (SqlConnection cn = new SqlConnection(Conexao.StringDeConexao))
+            {
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM UsuarioGrupoUsuario WHERE IdGrupoUsuario = @Id"))
+                {
+                    cmd.Parameters.AddWithValue("@Id", _idUsuario);
+                    if (transaction == null)
+                    {
+                        cn.Open();
+                        transaction = cn.BeginTransaction();
+                    }
+                    cmd.Transaction = transaction;
+                    cmd.Connection = transaction.Connection;
+
+                    try
+                    {
+                        if (_transaction == null)
+                            transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        transaction.Rollback();
+                        throw new Exception("ocorreu um erro ao tentar excluir todos os Usuários do grupo");
+                    }
+
+                }
+            }
+        }
+
         public bool ValidarPermissao(int _idUsuario, int _idPermissao)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
