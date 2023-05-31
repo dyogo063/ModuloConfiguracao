@@ -78,5 +78,10 @@ namespace WindowsFormsAppPrincipal
             permissoesBindingSource.RemoveCurrent();
             MessageBox.Show("registro excluido com sucesso");
         }
+
+        private void FormBuscarGrupousuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
